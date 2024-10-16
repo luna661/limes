@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>lime home page</title>
+    <title>ホームページ</title>
     <style>
+        
         body {
             margin: 0;
             padding: 0;
@@ -17,14 +18,14 @@
             overflow: hidden; 
         }
 
-   
+      
         .navbar {
             position: fixed; 
             top: 20px;
             right: 20px;
             display: flex;
             gap: 20px;
-            z-index: 1000;
+            z-index: 1000; 
         }
 
         .navbar a {
@@ -34,7 +35,6 @@
             position: relative;
             padding: 10px;
             transition: color 0.3s ease;
-            cursor: pointer;
         }
 
         .navbar a::after {
@@ -57,41 +57,31 @@
             left: 0;
         }
 
-
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .dropdown-content {
+        .more-menu {
             display: none;
             position: absolute;
-            top: 35px;
+            top: 40px;
             right: 0;
-            background-color: rgba(128, 0, 255, 0.9);
-            min-width: 150px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            background-color: rgba(255, 255, 255, 0.1);
             border-radius: 5px;
-            z-index: 1002;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            z-index: 1001; 
+            padding: 10px;
         }
 
-        .dropdown-content a {
-            color: white;
-            padding: 12px 16px;
-            text-decoration: none;
+        .more-menu a {
             display: block;
+            color: white;
+            text-decoration: none;
+            padding: 10px;
             transition: background-color 0.3s ease;
         }
 
-        .dropdown-content a:hover {
-            background-color: rgba(255, 204, 0, 0.8);
+        .more-menu a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
         }
 
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-        
-
+   
         .avatar-container {
             position: relative;
             width: 150px;
@@ -126,7 +116,7 @@
             transform: scale(1.1);
         }
 
-      
+       
         .snowflake {
             position: absolute;
             top: -50px;
@@ -134,7 +124,7 @@
             opacity: 0.8;
             border-radius: 50%;
             pointer-events: none;
-            animation: fall linear forwards;
+            animation: fall linear infinite;
         }
 
         @keyframes fall {
@@ -143,8 +133,8 @@
             }
         }
 
-        
-        .profile-section, .webhook-section, .discord-section {
+      
+        .profile-section, .webhook-section {
             display: none;
             position: fixed; 
             top: 50%;
@@ -154,26 +144,27 @@
             padding: 20px;
             background: rgba(255, 255, 255, 0.05); 
             backdrop-filter: blur(15px); 
-            border: 1px solid rgba(128, 0, 255, 0.3);
+            border: 1px solid rgba(128, 0, 255, 0.3); 
             border-radius: 10px;
             text-align: center;
             color: white;
-            z-index: 1001;
+            z-index: 1001; 
+            transition: transform 0.3s ease; 
         }
 
-        .profile-section img, .webhook-section img, .discord-section img {
+        .profile-section img, .webhook-section img {
             width: 100px;
             height: 100px;
             border-radius: 50%;
             margin-bottom: 10px;
         }
 
-        .profile-section h2, .webhook-section h2, .discord-section h2 {
+        .profile-section h2, .webhook-section h2 {
             margin: 20px 0;
             font-size: 24px;
         }
 
-        .profile-section .controls, .webhook-section .controls, .discord-section .controls {
+        .profile-section .controls, .webhook-section .controls {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -181,7 +172,7 @@
             margin-top: 10px;
         }
 
-        .profile-section button, .webhook-section button, .discord-section button {
+        .profile-section button, .webhook-section button {
             background-color: #ffcc00;
             border: none;
             padding: 10px 20px;
@@ -191,8 +182,28 @@
             border-radius: 5px;
             transition: background-color 0.3s ease;
         }
+        .icon-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px; 
+    z-index: 1000; 
+}
 
-        .profile-section button:hover, .webhook-section button:hover, .discord-section button:hover {
+.icon {
+    width: 40px;
+    height: 40px; 
+    border-radius: 50%; 
+    transition: transform 0.3s;
+}
+
+.icon:hover {
+    transform: scale(1.1); 
+}
+
+
+        .profile-section button:hover, .webhook-section button:hover {
             background-color: #e6b800;
         }
 
@@ -210,42 +221,40 @@
             resize: vertical;
         }
 
-        .discord-section .discord-content {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 10px;
-            margin-top: 10px;
-        }
-
         audio {
             display: none;
         }
     </style>
 </head>
 <body>
-    
 
- 
+
     <div class="navbar">
         <a href="#home" class="nav-link" id="homeLink">Home</a>
         <a href="#profile" class="nav-link" id="profileLink">Profile</a>
         <a href="#webhookspam" class="nav-link" id="webhookspamLink">WebhookSpam</a>
-        <div class="dropdown">
-            <a href="#more" class="nav-link">もっと見る</a>
-            <div class="dropdown-content">
-                <a href="#discord" class="sub-link" id="discordLink">Discord</a>
-                <a href="#sns" class="sub-link" id="snsLink">SNS</a>
-            </div>
+        <a href="#" class="nav-link" id="moreLink">もっと見る</a> 
+        <div class="more-menu" id="moreMenu">
+            <a href="#" id="discordLink">Discord</a>
         </div>
     </div>
 
-   
+<div class="icon-container">
+    <a href="https://discord.gg/limes" target="_blank">
+        <img src="discord.png" alt="Discord" class="icon">
+    </a>
+    <a href="https://x.com/voommxn" target="_blank">
+        <img src="x.png" alt="X" class="icon">
+    </a>
+</div>
+
+
+  
     <div class="avatar-container" id="avatarContainer">
         <img src="avatar.png" alt="Avatar Image">
     </div>
 
-    
+  
     <div class="profile-section" id="profileSection">
         <img src="profileavataer.png" alt="Profile Avatar"> 
         <h2>LIME</h2>
@@ -256,21 +265,12 @@
         <audio id="musicPlayer" src="music.mp4"></audio>
     </div>
 
-  
+    
     <div class="webhook-section" id="webhookSection">
         <h2>Webhook Spam</h2>
         <input type="text" id="webhookURL" placeholder="Webhook URL">
         <textarea id="message" rows="5" placeholder="Enter your message"></textarea>
         <button id="sendButton">SEND</button>
-    </div>
-
-    <div class="discord-section" id="discordSection">
-        <img src="servericon.png" alt="Server Icon">
-        <h2>Discord</h2>
-        <div class="discord-content">
-            <img src="discord.png" alt="Discord Logo">
-            <button id="joinDiscord">参加する</button>
-        </div>
     </div>
 
     <script>
@@ -279,7 +279,7 @@
         function createSnowflake() {
             const snowflake = document.createElement('div');
             snowflake.classList.add('snowflake');
-
+            
             const size = Math.random() * 10 + 5 + 'px';
             const position = Math.random() * window.innerWidth + 'px';
             const duration = Math.random() * 5 + 5 + 's';
@@ -315,73 +315,66 @@
 
         moveSnowflakes();
 
+   
         const homeLink = document.getElementById('homeLink');
         const profileLink = document.getElementById('profileLink');
         const webhookspamLink = document.getElementById('webhookspamLink');
+        const moreLink = document.getElementById('moreLink');
         const discordLink = document.getElementById('discordLink');
-        const snsLink = document.getElementById('snsLink');
+        const moreMenu = document.getElementById('moreMenu');
         const profileSection = document.getElementById('profileSection');
         const webhookSection = document.getElementById('webhookSection');
-        const discordSection = document.getElementById('discordSection');
         const avatarContainer = document.getElementById('avatarContainer');
         const playButton = document.getElementById('playButton');
         const musicPlayer = document.getElementById('musicPlayer');
         const volumeControl = document.getElementById('volumeControl');
         const sendButton = document.getElementById('sendButton');
-        const joinDiscordButton = document.getElementById('joinDiscord');
         let spamInterval; 
 
-     ト
+      
         homeLink.addEventListener('click', function (e) {
             e.preventDefault();
-      
+          
             profileSection.style.display = 'none';
             webhookSection.style.display = 'none';
-            discordSection.style.display = 'none';
-          
+      
             avatarContainer.style.display = 'block';
         });
 
         profileLink.addEventListener('click', function (e) {
             e.preventDefault();
-         
+           
             profileSection.style.display = 'block';
             webhookSection.style.display = 'none';
-            discordSection.style.display = 'none';
-   
+       
             avatarContainer.style.display = 'none';
         });
 
         webhookspamLink.addEventListener('click', function (e) {
             e.preventDefault();
-           
+            
             profileSection.style.display = 'none';
             webhookSection.style.display = 'block';
-            discordSection.style.display = 'none';
-       
+      
             avatarContainer.style.display = 'none';
+        });
+
+        moreLink.addEventListener('click', function (e) {
+            e.preventDefault();
+  
+            if (moreMenu.style.display === 'block') {
+                moreMenu.style.display = 'none';
+            } else {
+                moreMenu.style.display = 'block';
+            }
         });
 
         discordLink.addEventListener('click', function (e) {
             e.preventDefault();
-     
-            profileSection.style.display = 'none';
-            webhookSection.style.display = 'none';
-            discordSection.style.display = 'block';
-           
-            avatarContainer.style.display = 'none';
+            window.location.href = 'https://discord.gg/limes';
         });
 
-        snsLink.addEventListener('click', function (e) {
-            e.preventDefault();
-    
-            profileSection.style.display = 'none';
-            webhookSection.style.display = 'none';
-            discordSection.style.display = 'none';
-            avatarContainer.style.display = 'none';
-            alert('SNS ページはまだ実装されていません。');
-        });
-
+ 
         playButton.addEventListener('click', function () {
             if (musicPlayer.paused) {
                 musicPlayer.play();
@@ -392,12 +385,11 @@
             }
         });
 
- 
         volumeControl.addEventListener('input', function () {
             musicPlayer.volume = this.value;
         });
 
-  
+
         sendButton.addEventListener('click', function () {
             const webhookURL = document.getElementById('webhookURL').value;
             const message = document.getElementById('message').value;
@@ -406,6 +398,7 @@
                 alert('Webhook URL とメッセージを入力してください。');
                 return;
             }
+
 
             if (spamInterval) {
                 clearInterval(spamInterval);
@@ -435,17 +428,11 @@
             sendButton.textContent = 'STOP'; 
         });
 
-        joinDiscordButton.addEventListener('click', function () {
-            window.open('https://discord.gg/limes', '_blank');
-        });
-
-
         
+
         window.onload = function () {
             homeLink.click();
         };
-
-
     </script>
 </body>
 </html>
